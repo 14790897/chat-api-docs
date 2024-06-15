@@ -1,0 +1,112 @@
+---
+sidebar_position: 1
+---
+# Quick Start 
+To get started, you can use Chat API like this:
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="curl"
+  values={[
+    { label: 'cURL', value: 'curl'},
+    { label: 'Python', value: 'python'},
+    { label: 'JavaScript', value: 'javascript'},
+  ]}>
+
+<TabItem value="curl">
+
+```bash
+curl --location 'https://chatapi.paperai.life/v1/chat/completions' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer YOUR_API_KEY_HERE' \
+--data '{
+  "model": "gpt-4", 
+  "stream": false,
+  "messages": [
+    {
+      "role": "system",
+      "content": "" 
+    },
+    {
+      "role": "user",
+      "content": "What is the meaning of life?"
+    }
+  ]
+}
+'
+```
+
+</TabItem>
+<TabItem value="python">
+
+```python
+import requests
+
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_API_KEY_HERE',
+}
+
+data = '''
+{
+  "model": "gpt-4", 
+  "stream": false,
+  "messages": [
+    {
+      "role": "system",
+      "content": "" 
+    },
+    {
+      "role": "user",
+      "content": "What is the meaning of life?"
+    }
+  ]
+}
+'''
+
+response = requests.post('https://chatapi.paperai.life/v1/chat/completions', headers=headers, data=data)
+print(response.text)
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```javascript
+const fetch = require('node-fetch');
+
+const apiKey = 'YOUR_API_KEY_HERE';
+
+const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`,
+}
+
+const body = {
+  "model": "gpt-4", 
+  "stream": false,
+  "messages": [
+    {
+      "role": "system",
+      "content": "" 
+    },
+    {
+      "role": "user",
+      "content": "What is the meaning of life?"
+    }
+  ]
+};
+
+fetch('https://chatapi.paperai.life/v1/chat/completions', {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(body)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
+</TabItem>
+</Tabs>
